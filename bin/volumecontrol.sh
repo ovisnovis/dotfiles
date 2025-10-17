@@ -31,9 +31,6 @@ get_wpctl_info() {
 		echo "ERROR: Failed to get WPCTL info." >&2
 		return 1
 	fi
-
-	# --- FIX: Use simple grep/awk for reliable decimal extraction ---
-	# This finds '0.' or '1.' followed by digits, regardless of surrounding text
 	local VOL_DEC
 	VOL_DEC=$(echo "$INFO" | grep -oE '[0-9]\.[0-9]{2,}' | head -n 1 || echo "0.00")
 	if [ "$VOL_DEC" == "" ]; then
@@ -49,12 +46,6 @@ get_wpctl_info() {
 	else
 		IS_MUTED=false
 	fi
-
-	echo "VOL_DEC: $VOL_DEC" >&2
-	echo "CURRENT_VOLUME: $CURRENT_VOLUME%" >&2
-	echo "IS_MUTED: $IS_MUTED" >&2
-	echo "--------------------------" >&2
-
 	return 0
 }
 
