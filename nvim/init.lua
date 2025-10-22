@@ -1,5 +1,5 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.relativenumber = true
@@ -35,11 +35,10 @@ vim.o.confirm = true
 -- [[ Basic Keymaps ]]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "é", ":", { noremap = true, silent = false })
-vim.keymap.set("n", "-", "/", { noremap = true, silent = false })
-vim.keymap.set("v", "-", "/", { noremap = true, silent = false })
-
-vim.keymap.set("n", "ö", ";", { noremap = true, silent = false })
+vim.keymap.set("n", "<C-Space>", "?")
+vim.keymap.set("x", "<C-Space>", "?")
+vim.keymap.set("n", " ", "/", { noremap = true, silent = false })
+vim.keymap.set("x", " ", "/", { noremap = true, silent = false })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = false })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = false })
@@ -72,12 +71,6 @@ end
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
-
--- [[ Configure and install plugins ]]
---  To check the current status of your plugins, run
---    :Lazy
---  To update plugins you can run
---    :Lazy update
 require("lazy").setup({
 	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -151,13 +144,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			{ -- If encountering errors, see telescope-fzf-native README for installation instructions
 				"nvim-telescope/telescope-fzf-native.nvim",
-
-				-- `build` is used to run some command when the plugin is installed/updated.
-				-- This is only run then, not every time Neovim starts up.
 				build = "make",
-
-				-- `cond` is a condition used to determine whether this plugin should be
-				-- installed and loaded.
 				cond = function()
 					return vim.fn.executable("make") == 1
 				end,
@@ -166,8 +153,6 @@ require("lazy").setup({
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
-			-- [[ Configure Telescope ]]
-			-- See `:help telescope` and `:help telescope.setup()`
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
@@ -217,8 +202,6 @@ require("lazy").setup({
 			end, { desc = "[S]earch [N]eovim files" })
 		end,
 	},
-
-	-- LSP Plugins
 	{
 		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
@@ -542,8 +525,6 @@ require("lazy").setup({
 				"html",
 				"lua",
 				"luadoc",
-				"markdown",
-				"markdown_inline",
 				"query",
 				"vim",
 				"vimdoc",
