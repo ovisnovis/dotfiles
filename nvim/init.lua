@@ -34,7 +34,7 @@ vim.o.scroll = 10
 vim.o.confirm = true
 -- [[ Basic Keymaps ]]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
+vim.keymap.set("n", "-", "<cmd>bn<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-Space>", "?")
 vim.keymap.set("x", "<C-Space>", "?")
 vim.keymap.set("n", " ", "/", { noremap = true, silent = false })
@@ -56,7 +56,35 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.hl.on_yank()
 	end,
 })
+-- Function to check if the current command-line is a search
+-- and appends 'zz' (center) if it is.
+local function center_first_search_match()
+	-- getcmdtype() returns '/' for forward search, '?' for backward search
+	if vim.fn.getcmdtype() == "/" or vim.fn.getcmdtype() == "?" then
+		-- Return '<CR>zz' to execute the search and then center the line
+		return "<CR>zz"
+	else
+		-- Otherwise, just execute the command normally
+		return "<CR>"
+	end
+end
 
+-- Create the Command-Line mode expression mapping
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.keymap.set("c", "<CR>", center_first_search_match, {
+			expr = true,
+			silent = true,
+			desc = "Center first search result",
+		})
+
+		-- (Optional but highly recommended) Re-include the n/N mappings for consistency
+		vim.keymap.set("n", "n", "nzz", { noremap = true, silent = true, desc = "Next search result and center" })
+		vim.keymap.set("n", "N", "Nzz", { noremap = true, silent = true, desc = "Previous search result and center" })
+	end,
+	once = true,
+	desc = "Search centering configuration",
+})
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
