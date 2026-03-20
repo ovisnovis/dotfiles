@@ -238,6 +238,7 @@ libubsan
 libunistring
 libunwind
 libusb
+libutempter
 libutf8proc
 libuv
 libverto
@@ -409,6 +410,7 @@ tar
 tdb
 texinfo
 tinysparql
+tmux
 tpm2-tss
 tree
 tree-sitter
