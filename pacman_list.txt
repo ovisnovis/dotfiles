@@ -34,8 +34,10 @@ ca-certificates-mozilla
 ca-certificates-utils
 cairo
 cblas
+clang
 cmake
 comgr
+compiler-rt
 composable-kernel
 containerd
 coreutils
