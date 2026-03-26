@@ -17,6 +17,8 @@ filetype plugin indent on
 set encoding=UTF-8
 set hidden
 set scrolloff=16
+set autowrite
+set autowriteall
 
 " --- Search Settings ---
 set hlsearch incsearch

@@ -83,6 +83,7 @@ libxmu
 libxss
 libyaml
 llhttp
+lolcat
 lsd
 lsof
 lua
@@ -203,6 +204,8 @@ xcb-util-wm
 xdg-utils
 xxhash
 yaml-cpp
+zathura
+zathura-pdf-mupdf
 zip
 zlib-ng
 zsh
