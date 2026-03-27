@@ -44,3 +44,5 @@ bindkey '^Z' _zsh_cli_fg
 # Use keychain to manage SSH keys persistently across shell sessions.
 # This replaces standard ssh-agent and prevents multiple agents from spawning.
 eval $(keychain --eval fhkey)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

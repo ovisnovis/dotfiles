@@ -135,6 +135,7 @@ python-prettytable
 python-pyaml
 python-pycparser
 python-pyelftools
+python-ruff
 python-wcwidth
 python-wheel
 python-yaml
